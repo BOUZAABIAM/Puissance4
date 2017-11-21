@@ -105,4 +105,4 @@ displayBoard:-
     writeln('  ---------------------------------').
 
 %%%%% Start the game! //TODO : replace displayBoard by play when it works
-init :- retractall(board(_)), length(Board,42), assert(board(Board)), play('X').
+init :- retractall(board(_)), length(Board,42), assert(board(Board)),play('X').
