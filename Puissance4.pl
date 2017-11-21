@@ -41,27 +41,42 @@ isBoardFull([H|T]):- nonvar(H), isBoardFull(T).
 %%%% Artificial intelligence: choose in a Board the index to play for Player (_) //TODO
 %%%% This AI plays randomly and does not care who is playing: it chooses a free position
 %%%% in the Board (an element which is an free variable).
-ia(Board, Index,_) :- repeat, Index is random(9), nth0(Index, Board, Elem), var(Elem), !.
+verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;verif2(Index,B,Move).
+verif2(Index,B,Move):-Inde is Index+7, verif1(Inde,B,Move).
+ia(B,Move,_) :-       
+                     
+                       Index1 is random(7),
+                       Index is 6-Index1,
+                       verif1(Index,B,Move)
+                       .
 
 %%%% Recursive predicate for playing the game. //DONE
 % The game is over, we use a cut to stop the proof search, and display the winner/board.
-play(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
+%play(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
 
 % The game is not over, we play the next turn //TODO
-play(Player):-  write('New turn for:'), writeln(Player),
-		board(Board), % instanciate the board from the knowledge base
-	    displayBoard, % print it
-            ia(Board, Move,Player), % ask the AI for a move, that is, an index for the Player
-	    playMove(Board,Move,NewBoard,Player), % Play the move and get the result in a new Board
-		    applyIt(Board, NewBoard), % Remove the old board from the KB and store the new one
-	    changePlayer(Player,NextPlayer), % Change the player before next turn
-            play(NextPlayer). % next turn!
+play(Player):-  
+        write('New turn for:'), writeln(Player),
+        board(Board), % instanciate the board from the knowledge base
+	displayBoard, % print it
+        inv(Board,R),
+        ia(R, Move,Player), % ask the AI for a move, that is, an index for the Player
+	playMove(Board,Move,NewBoard,Player), % Play the move and get the result in a new Board
+        applyIt(Board, NewBoard), % Remove the old board from the KB and store the new one
+	changePlayer(Player,NextPlayer), % Change the player before next turn
+        play(NextPlayer). % next turn!
 
 %%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move //DONE
 playMove(Board,Move,NewBoard,Player) :- Board=NewBoard,  nth0(Move,NewBoard,Player).
 
 %%%% Remove old board/save new on in the knowledge base //DONE
 applyIt(Board,NewBoard) :- retract(board(Board)), assert(board(NewBoard)).
+
+%%%%% Inverse the board %%%%%%
+append([],L,L).
+append([H|T],L,[H|B]) :- append(T,L,B).
+inv([],[]) :- !.
+inv([A|B],R) :- inv(B,X),append(X,[A],R).
 
 %%%% Predicate to get the next player //DONE
 changePlayer('X','O').
@@ -74,7 +89,7 @@ printVal(N) :- board(B), nth0(N,B,Val), write(Val),  write(' | ').
 
 %%%% Display the board //DONE
 displayBoard:-
-    writeln('    1   2   3   4   5   6   7   '),
+    writeln('  1   2   3   4   5   6   7   '),
     writeln('  ---------------------------------'),
     write(' '), printVal(0) , printVal(1) , printVal(2) , printVal(3) , printVal(4) , printVal(5) , printVal(6) , writeln(''),
     writeln('  ---------------------------------'),
