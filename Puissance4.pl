@@ -8,7 +8,7 @@
 
 :- dynamic board/1. 
 
-%%%% Test is the game is finished %%% //TODO
+%%%% Test is the game is finished %%% //DONE
 gameover(Winner) :- board(Board), winner(Board,Winner), !.  % There exists a winning configuration: We cut!
 gameover('Draw') :- board(Board), isBoardFull(Board). % the Board is fully instanciated (no free variable): Draw.
 
