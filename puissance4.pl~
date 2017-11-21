@@ -14,7 +14,7 @@ gameover('Draw') :- board(Board), isBoardFull(Board). % the Board is fully insta
 
 %%%% Test if a Board is a winning configuration for the player P. //TODO
 sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2.
-sameItem(A, B, C, D, Board, P):-  nth1(A, Board, P), nth1(B, Board, P), nth1(C, Board, P), nth1(D, Board, P).
+sameItem(A, B, C, D, Board, P):-  nth1(A, Board, P), nth1(B, Board, P), nth1(C, Board, P), nth1(D, Board, P), writeln(A), writeln(B), writeln(C), writeln(D), writeln("fin").
 
 
 winnerHorizontal(Board, P, N):- N < 40, N1 is N+1, N2 is N+2, N3 is N+3, sameLine(N, N3), sameItem(N, N1, N2, N3, Board, P), !.
