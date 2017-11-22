@@ -38,18 +38,29 @@ isBoardFull([]).
 isBoardFull([H|T]):- nonvar(H), isBoardFull(T).
 
 
-%%%% Artificial intelligence: choose in a Board the index to play for Player (_) //TODO
-%%%% This AI plays randomly and does not care who is playing: it chooses a free position
-%%%% in the Board (an element which is an free variable).
-verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;verif2(Index,B,Move).
-verif2(Index,B,Move):-Inde is Index+7, verif1(Inde,B,Move).
-ia(B,Move,_) :-       
-                     
-                       Index1 is random(7),
-                       Index is 6-Index1,
-                       verif1(Index,B,Move)
-                       .
+%%%%% Inverse the board %%%%%%
+append([],L,L).
+append([H|T],L,[H|B]) :- append(T,L,B).
+inv([],[]) :- !.
+inv([A|B],R) :- inv(B,X),append(X,[A],R).
 
+%%%% Artificial intelligence: choose in a Board the index to play for Player (_) //Done   %%%%
+%%%% This AI plays randomly and does not care who is playing: it chooses a free position  %%%%
+%%%% in the Board (an element which is an free variable).      
+
+%%% Verifier si la case est vide ou non:
+%%% si oui => on peut jouer dans cette case, %%% Move is 41-Index ==> récupere le n° correcte de la case
+%%% sinon ==> on utilse le prédicat verif2 pour incrementer l'index par 7 et renfait verif1 
+verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;verif2(Index,B,Move).
+verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
+ia(B,Move,_) :-       
+                       inv(B,R), %%% On va parcourir le board dans le sens contraire 
+		       		 %%% pour trouver la case vide qui appartient à la ligne la plus basse.
+                       Index1 is random(7),  % Attribution d'un numéro alétoire de colonne 
+                       Index is 6-Index1,    % Adaptation du n°de colonne avec le board inversé.
+                       verif1(Index,R,Move). % 
+                       
+		       
 %%%% Recursive predicate for playing the game. //DONE
 % The game is over, we use a cut to stop the proof search, and display the winner/board.
 %play(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
@@ -59,8 +70,7 @@ play(Player):-
         write('New turn for:'), writeln(Player),
         board(Board), % instanciate the board from the knowledge base
 	displayBoard, % print it
-        inv(Board,R),
-        ia(R, Move,Player), % ask the AI for a move, that is, an index for the Player
+        ia(Board, Move,Player), % ask the AI for a move, that is, an index for the Player
 	playMove(Board,Move,NewBoard,Player), % Play the move and get the result in a new Board
         applyIt(Board, NewBoard), % Remove the old board from the KB and store the new one
 	changePlayer(Player,NextPlayer), % Change the player before next turn
@@ -72,11 +82,6 @@ playMove(Board,Move,NewBoard,Player) :- Board=NewBoard,  nth0(Move,NewBoard,Play
 %%%% Remove old board/save new on in the knowledge base //DONE
 applyIt(Board,NewBoard) :- retract(board(Board)), assert(board(NewBoard)).
 
-%%%%% Inverse the board %%%%%%
-append([],L,L).
-append([H|T],L,[H|B]) :- append(T,L,B).
-inv([],[]) :- !.
-inv([A|B],R) :- inv(B,X),append(X,[A],R).
 
 %%%% Predicate to get the next player //DONE
 changePlayer('X','O').
