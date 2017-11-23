@@ -74,7 +74,7 @@ human(B,X,Move,_) :-
                        
 		       
 %%%% fonction play Random AI contre Random AI %%%%
-%playIAvsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
+playIAvsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
 playIAvsIA(Player):-  
         write('New turn for:'), writeln(Player),
         board(Board), % instanciate the board from the knowledge base
@@ -88,7 +88,7 @@ playIAvsIA(Player):-
 
 
 %%%%% fonction play pour un human contre Random AI %%%%%%
-%playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
+playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
 playHumanVsIA(Player):-  
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
@@ -108,7 +108,7 @@ playHumanVsIA(Player):-
 
 
 %%%%% fonction play pour un human contre un human %%%%%%
-%playHumanVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
+playHumanVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
 playHumanVsHuman(Player):-  
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it

@@ -41,7 +41,8 @@ testWinnerVertical :- winnerVertical(
 'X','a','a','a','a','a','a',
 'X','a','a','a','a','a','a',
 'X','a','a','a','a','a','a']
-, 'X', 1),not(winnerVertical(
+, 'X', 1),
+not(winnerVertical(
 ['a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
 'a','O','a','a','a','a','a',
@@ -51,5 +52,17 @@ testWinnerVertical :- winnerVertical(
 , 'O', 1))
 .
 
-%testWinnerDiagonale1 :- winnerDiagonale1(Board, P, N).
+testWinnerDiagonale1 :- winnerDiagonale1(
+['a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','X','a','a','a',
+'a','a','X','a','a','a','a',
+'a','X','a','a','a','a','a',
+'X','a','a','a','a','a','a']
+, 'X', 1).
+
+
 %testWinnerDiagonale2 :- winnerDiagonale2(Board, P, N).
+
+testWinner :- testWinnerHorizontal, testWinnerVertical.
+
