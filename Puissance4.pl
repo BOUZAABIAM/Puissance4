@@ -74,16 +74,16 @@ human(B,X,Move,_) :-
                        
 		       
 %%%% fonction play Random AI contre Random AI %%%%
-%play(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
-play(Player):-  
+%playIAvsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
+playIAvsIA(Player):-  
         write('New turn for:'), writeln(Player),
         board(Board), % instanciate the board from the knowledge base
-	    displayBoard, % print it
         ia(Board, Move,Player), % ask the AI for a move, that is, an index for the Player
 	    playMove(Board,Move,NewBoard,Player), % Play the move and get the result in a new Board
         applyIt(Board, NewBoard), % Remove the old board from the KB and store the new one
+    	displayBoard, % print it
 	    changePlayer(Player,NextPlayer), % Change the player before next turn
-        play(NextPlayer). % next turn!
+        playIAvsIA(NextPlayer). % next turn!
 
 
 
@@ -180,7 +180,7 @@ init :-
 %%% Selon le choix, on lance la fonction adéquate %%%%%
 playerType(X,Y):-
     (
-    X=1, Y=1, play('X');
+    X=1, Y=1, playIAvsIA('X');
     X=0, Y=0, playHumanVsHuman('X');
     X=0, Y=1, playHumanVsIA('X')
     ).
