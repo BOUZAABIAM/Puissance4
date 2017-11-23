@@ -13,8 +13,9 @@ gameover(Winner) :- board(Board), winner(Board,Winner), !.  % There exists a win
 gameover('Draw') :- board(Board), isBoardFull(Board). % the Board is fully instanciated (no free variable): Draw.
 
 %%%% Test if a Board is a winning configuration for the player P. //TODO
-sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2.
-sameItem(A, B, C, D, Board, P):-  nth1(A, Board, P), nth1(B, Board, P), nth1(C, Board, P), nth1(D, Board, P).
+sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2. %true if index A and B are on the same line
+%sameItem : true if the elements at the A, B, C and D index of the board are P
+sameItem(A, B, C, D, Board, P):-  nth1(A, Board, P), nth1(B, Board, P), nth1(C, Board, P), nth1(D, Board, P). 
 
 
 winnerHorizontal(Board, P, N):- N < 40, N1 is N+1, N2 is N+2, N3 is N+3, sameLine(N, N3), sameItem(N, N1, N2, N3, Board, P), !.
