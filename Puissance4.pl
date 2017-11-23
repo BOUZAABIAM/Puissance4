@@ -51,7 +51,7 @@ inv([A|B],R) :- inv(B,X),append(X,[A],R).
 %%% Verifier si la case est vide ou non:
 %%% si oui => on peut jouer dans cette case, %%% Move is 41-Index ==> récupere le n° correcte de la case
 %%% sinon ==> on utilse le prédicat verif2 pour incrementer l'index par 7 et renfait verif1 
-verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;verif2(Index,B,Move).
+verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index,verif2(Index,B,Move).
 verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
 ia(B,Move,_) :-       
                        inv(B,R), %%% On va parcourir le board dans le sens contraire 
