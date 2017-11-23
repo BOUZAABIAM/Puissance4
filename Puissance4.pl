@@ -166,10 +166,10 @@ init :-
         length(Board,42), 
         assert(board(Board)),
         writeln('What is the type of the first player which will use the symbol X ?'),
-        writeln('  - 0 : for a human player .'),writeln('  - 1 for a Random AI .'),
+        writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),
         readChoice(Player1, -1, 2),
         writeln('What is the type of the second player which will use the symbol O ?'),
-        writeln('  - 0 : for a human player .'),writeln('  - 1 for a Random AI .'),
+        writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),
         readChoice(Player2, -1, 2),
         playerType(Player1,Player2).
         
