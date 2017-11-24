@@ -30,4 +30,4 @@ readChoice(X, Min, Max) :-
     !.
 readInt(X) :-
     repeat, write('    Please enter an integer '), read(X), integer(X), !.
-:-init.
+
