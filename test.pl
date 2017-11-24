@@ -58,10 +58,48 @@ testWinnerDiagonale1 :- winnerDiagonale1(
 'a','a','X','a','X','a','a',
 'a','X','a','a','a','X','a',
 'X','a','a','a','a','a','X']
-, 'X', 1), writeln('winnerDiagonale1 : check').
+, 'X', 1),
+winnerDiagonale1(
+['a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','X','a','a','a',
+'a','a','a','a','X','a','a',
+'a','a','a','a','a','X','a',
+'a','a','a','a','a','a','X']
+, 'X', 1),
+not(winnerDiagonale1(
+['a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','X','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','a','a','a','X']
+, 'X', 1)), writeln('winnerDiagonale1 : check').
 
+testWinnerDiagonale2 :- winnerDiagonale2(
+['a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','X','a','a','a',
+'a','a','X','a','X','a','a',
+'a','X','a','a','a','X','a',
+'X','a','a','a','a','a','X']
+, 'X', 1),
+winnerDiagonale2(
+['a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','X','a','a','a',
+'a','a','X','a','a','a','a',
+'a','X','a','a','a','a','a',
+'X','a','a','a','a','a','a']
+, 'X', 1),
+not(winnerDiagonale2(
+['a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','X','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','a','a','a','a',
+'a','a','a','a','a','a','X']
+, 'X', 1)), writeln('winnerDiagonale2 : check').
 
-%testWinnerDiagonale2 :- winnerDiagonale2(Board, P, N).
-
-testWinner :- testWinnerHorizontal, testWinnerVertical.
+testWinner :- testWinnerHorizontal, testWinnerVertical, testWinnerDiagonale1, testWinnerDiagonale2.
 
