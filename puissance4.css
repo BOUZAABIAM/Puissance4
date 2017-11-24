@@ -1,0 +1,390 @@
+
+.button {
+   
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 1px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    width: 200px;
+    
+}
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */ 
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+
+
+.parent {
+  position: relative;
+  top: -300px;
+  left: 240px;
+}
+.image1 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.case0:before {
+  position: absolute;
+  top: -54px;
+  left: 35px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case1:before {
+  position: absolute;
+  top: -54px;
+  left: 107px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case2:before {
+  position: absolute;
+  top: -54px;
+  left: 180px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case3:before {
+  position: absolute;
+  top: -54px;
+  left: 253px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case4:before {
+  position: absolute;
+  top: -54px;
+  left: 326px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case5:before {
+  position: absolute;
+  top: -54px;
+  left: 399px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case6:before {
+  position: absolute;
+  top: -54px;
+  left: 471px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+
+/* */
+.case7:before {
+  position: absolute;
+  top: 18px;
+  left: 35px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case8:before {
+  position: absolute;
+  top: 18px;
+  left: 107px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case9:before {
+  position: absolute;
+  top: 18px;
+  left: 180px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case10:before {
+  position: absolute;
+  top: 18px;
+  left: 253px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case11:before {
+  position: absolute;
+  top: 18px;
+  left: 326px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case12:before {
+  position: absolute;
+  top: 18px;
+  left: 399px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case13:before {
+  position: absolute;
+  top: 18px;
+  left: 471px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+/* */
+.case14:before {
+  position: absolute;
+  top: 90px;
+  left: 35px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case15:before {
+  position: absolute;
+  top: 90px;
+  left: 107px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case16:before {
+  position: absolute;
+  top: 90px;
+  left: 180px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case17:before {
+  position: absolute;
+  top: 90px;
+  left: 253px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case18:before {
+  position: absolute;
+  top: 90px;
+  left: 326px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case19:before {
+  position: absolute;
+  top: 90px;
+  left: 399px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case20:before {
+  position: absolute;
+  top: 90px;
+  left: 471px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+ /**/
+.case21:before {
+  position: absolute;
+  top: 164px;
+  left: 35px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case22:before {
+  position: absolute;
+  top: 164px;
+  left: 107px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case23:before {
+  position: absolute;
+  top: 164px;
+  left: 180px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case24:before {
+  position: absolute;
+  top: 164px;
+  left: 253px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case25:before {
+  position: absolute;
+  top: 164px;
+  left: 326px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case26:before {
+  position: absolute;
+  top: 164px;
+  left: 399px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case27:before {
+  position: absolute;
+  top: 164px;
+  left: 471px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+
+/* */
+.case28:before {
+  position: absolute;
+  top: 235px;
+  left: 35px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case29:before {
+  position: absolute;
+  top: 235px;
+  left: 107px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case30:before {
+  position: absolute;
+  top: 235px;
+  left: 180px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case31:before {
+  position: absolute;
+  top: 235px;
+  left: 253px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case32:before {
+  position: absolute;
+  top: 235px;
+  left: 326px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case33:before {
+  position: absolute;
+  top: 235px;
+  left: 399px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case34:before {
+  position: absolute;
+  top: 235px;
+  left: 471px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+/* */
+.case35:before {
+  position: absolute;
+  top: 308px;
+  left: 35px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case36:before {
+  position: absolute;
+  top: 308px;
+  left: 107px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case37:before {
+  position: absolute;
+  top: 308px;
+  left: 180px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case38:before {
+  position: absolute;
+  top: 306px;
+  left: 253px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case39:before {
+  position: absolute;
+  top: 308px;
+  left: 326px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case40:before {
+  position: absolute;
+  top: 308px;
+  left: 399px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+.case41:before {
+  position: absolute;
+  top: 308px;
+  left: 471px;
+  content: ' \25CF';
+  font-size: 150px;
+  color: red;
+}
+
+
+
+

@@ -22,7 +22,7 @@ playIAVsHuman(Player):-
         display: displayBoard,
         game: changePlayer(Player,NextPlayer),
         write('It is your turn : '),write(NextPlayer),write(' choose a column number : '), init: readChoice(X, 0, 8),X1 is X-1,
-        display: board(Board2),
+        init: board(Board2),
         utilsHvsH: human(Board2,X1, MoveH,NextPlayer),
         game: playMove(Board2,MoveH,NewBoard2,NextPlayer),
         game: applyIt(Board2, NewBoard2),
