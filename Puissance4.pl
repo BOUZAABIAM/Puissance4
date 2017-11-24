@@ -87,9 +87,7 @@ playIAvsIA(Player):-
 
 
 %%%%% fonction play pour un human contre Random AI %%%%%%
-<<<<<<< HEAD
 playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
->>>>>>> origin/master
 playHumanVsIA(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
