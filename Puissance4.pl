@@ -15,8 +15,9 @@ gameover('Draw') :- board(Board), isBoardFull(Board). % the Board is fully insta
 %%%% Test if a Board is a winning configuration for the player P. //TODO
 
 sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2. %true if index A and B are on the same line
-%sameItem : true if the elements at the A, B, C and D index of the board are P
-sameItem(A, B, C, D, Board, P):-  nth1(A, Board, Q), nth1(B, Board, R), nth1(C, Board, S), nth1(D, Board, P), nonvar(Q), nonvar(R), nonvar(S), Q == R, R == S, S == P.
+%%%%sameItem : true if the elements at the A, B, C and D index of theboard are P
+
+sameItem(A, B, C, D, Board, P):-  nth1(A, Board, Q), nth1(B, Board, R),nth1(C, Board, S),nth1(D, Board, T),nonvar(Q), nonvar(R), nonvar(S), nonvar(T), Q == R, R == S, S == T, T == P.
 
 
 winnerHorizontal(Board, P, N):- N < 40, N1 is N+1, N2 is N+2, N3 is N+3, sameLine(N, N3), sameItem(N, N1, N2, N3, Board, P), !.
@@ -24,9 +25,9 @@ winnerHorizontal(Board, P, N):- N < 39,  N1 is N+1, winnerHorizontal(Board, P, N
 winnerVertical(Board, P, N):- N < 22, N1 is N+7, N2 is N+14, N3 is N+21, sameItem(N, N1, N2, N3, Board, P), !.
 winnerVertical(Board, P, N):- N < 21,  Next is N+1, winnerVertical(Board, P, Next).
 winnerDiagonale1(Board, P, N):-  N < 19, N1 is N+8, N2 is N1+8, N3 is N2+8, sameItem(N, N1, N2, N3, Board, P),  !.
-winnerDiagonale1(Board, P, N):- N < 18, Next is N+1, winnerVertical(Board, P, Next).
-winnerDiagonale2(Board, P, N):-  N < 22, N1 is N+6, N2 is N1+6, N3 is N2+6, sameItem(N, N1, N2, N3, Board, P), !.
-winnerDiagonale2(Board, P, N):- N < 21, Next is N+1, winnerVertical(Board, P, Next).
+winnerDiagonale1(Board, P, N):- N < 18, Next is N+1, winnerDiagonale1(Board, P, Next).
+winnerDiagonale2(Board, P, N):- N < 22, N1 is N+6, N2 is N1+6, N3 is N2+6,sameItem(N, N1, N2, N3, Board, P),!.
+winnerDiagonale2(Board, P, N):- N < 21, Next is N+1, winnerDiagonale2(Board, P, Next).
 
 winner(Board, P):- winnerHorizontal(Board, P, 1).
 winner(Board, P):- winnerVertical(Board, P, 1).
@@ -58,9 +59,9 @@ verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
 ia(B,Move,_) :-
                             repeat,
                             inv(B,R), %%% On va parcourir le board dans le sens contraire
-                                      %%% pour trouver la case vide qui appartient � la ligne la plus basse.
-                            Index1 is random(7),  % Attribution d'un num�ro al�atoire de colonne
-                            Index is 6-Index1,    % Adaptation du n�de colonne avec le board invers�.
+                                      %%% pour trouver la case vide qui appartient à la ligne la plus basse.
+                            Index1 is random(7),  % Attribution d'un numéro alétoire de colonne
+                            Index is 6-Index1,    % Adaptation du n°de colonne avec le board inversé.
                             verif1(Index,R,Move);
                             (nonvar(Move)->!).
 %%%% fonction qui donne la bonne case vide dans la colonne choisie par le player human %%%%%
