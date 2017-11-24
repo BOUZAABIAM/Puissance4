@@ -1,4 +1,4 @@
-:- module('gameover', []).
+:- module('gameOver', []).
 :- use_module('init').
 
 

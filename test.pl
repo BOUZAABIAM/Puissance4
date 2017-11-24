@@ -1,8 +1,8 @@
-:-["Puissance4.pl","display.pl","game.pl", "gameover.pl", "utilsAIvsAi.pl", "utilsAIvsH.pl", "utilsHvsAi.pl", "utilsHvsH.pl"].
+:-["display.pl","game.pl", "gameover.pl", "utilsAIvsAi.pl", "utilsAIvsH.pl", "utilsHvsAi.pl", "utilsHvsH.pl", "init.pl"].
 
-testSameLine :- write('sameLine'), sameLine(1,2),sameLine(40,41),not(sameLine(6,7)),not(sameLine(1,41)),writeln(' : check').
+testSameLine :- write('sameLine'), gameOver : sameLine(1,2),gameOver : sameLine(40,41),not(gameOver : sameLine(6,7)),not(gameOver : sameLine(1,41)),writeln(' : check').
 
-testSameItem :-  write('sameItem'), sameItem(39,40,41,42,
+testSameItem :-  write('sameItem'), gameOver : sameItem(39,40,41,42,
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,_18,_19,_20,_21,
@@ -10,7 +10,7 @@ testSameItem :-  write('sameItem'), sameItem(39,40,41,42,
  _29,_30,_31,_32,_33,_34,_35,
  _36,_37,_38,'O','O','O','O'],
 'O'),
-sameItem(39,33,27,21,
+gameOver : sameItem(39,33,27,21,
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,_18,_19,_20,'O',
@@ -18,7 +18,7 @@ sameItem(39,33,27,21,
  _29,_30,_31,_32,'O',_34,_35,
  _36,_37,_38,'O',_40,_41,_42],
 'O'),
-not(sameItem(39,40,41,42,
+not(gameOver : sameItem(39,40,41,42,
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,_18,_19,_20,_21,
@@ -27,7 +27,7 @@ not(sameItem(39,40,41,42,
  _36,_37,_38,'O','X','O','X'],
 'O')), writeln(' : check').
 
-testWinnerHorizontal :-  write('winnerHorizontal'), winnerHorizontal(
+testWinnerHorizontal :-  write('winnerHorizontal'), gameOver : winnerHorizontal(
 ['a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
@@ -35,7 +35,7 @@ testWinnerHorizontal :-  write('winnerHorizontal'), winnerHorizontal(
 'a','a','a','a','a','a','a',
 'a','X','X','X','X','a','a']
 , 'X', 1),
-winnerHorizontal(
+gameOver : winnerHorizontal(
 ['a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
@@ -43,7 +43,7 @@ winnerHorizontal(
 'a','a','a','a','a','a','a',
 'a','O','O','O','O','a','a']
 , 'O', 1),
- not(winnerHorizontal(
+ not(gameOver : winnerHorizontal(
 ['X','X','X','a','a','a','a',
 'a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
@@ -51,7 +51,7 @@ winnerHorizontal(
 'a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a']
 , 'X', 1)),
- not(winnerHorizontal(
+ not(gameOver : winnerHorizontal(
 ['a','a','a','a','a','X','X',
 'X','X','a','a','a','a','a',
 'a','a','a','a','a','a','a',
@@ -60,7 +60,7 @@ winnerHorizontal(
 'a','a','a','a','a','a','a']
 , 'X', 1)), writeln(' : check').
 
-testWinnerVertical :- write('winnerVertical'), winnerVertical(
+testWinnerVertical :- write('winnerVertical'), gameOver : winnerVertical(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  'X',_16,_17,_18,_19,_20,_21,
@@ -68,7 +68,7 @@ testWinnerVertical :- write('winnerVertical'), winnerVertical(
  'X',_30,_31,_32,_33,_34,_35,
  'X',_37,_38,_39,_40,_41,_42]
 , 'X', 1),
-not(winnerVertical(
+not(gameOver : winnerVertical(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,'O',_10,_11,_12,_13,_14,
  _15,'O',_17,_18,_19,_20,_21,
@@ -77,7 +77,7 @@ not(winnerVertical(
  'O',_37,_38,_39,_40,_41,_42]
 , 'O', 1)), writeln(' : check').
 
-testWinnerDiagonale1 :-  write('winnerDiagonale1'), winnerDiagonale1(
+testWinnerDiagonale1 :-  write('winnerDiagonale1'), gameOver : winnerDiagonale1(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -85,7 +85,7 @@ testWinnerDiagonale1 :-  write('winnerDiagonale1'), winnerDiagonale1(
  _29,'X',_31,_32,_33,'X',_35,
  'X',_37,_38,_39,_40,_41,'X']
 , 'X', 1),
-winnerDiagonale1(
+gameOver : winnerDiagonale1(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -93,7 +93,7 @@ winnerDiagonale1(
  _29,_30,_31,_32,_33,'X',_35,
  _36,_37,_38,_39,_40,_41,'X']
 , 'X', 1),
-not(winnerDiagonale1(
+not(gameOver : winnerDiagonale1(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'O',_19,_20,_21,
@@ -102,7 +102,7 @@ not(winnerDiagonale1(
  _36,_37,_38,_39,_40,_41,'X']
 , 'X', 1)), writeln(' : check').
 
-testWinnerDiagonale2 :-  write('winnerDiagonale2'), winnerDiagonale2(
+testWinnerDiagonale2 :-  write('winnerDiagonale2'), gameOver : winnerDiagonale2(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -110,7 +110,7 @@ testWinnerDiagonale2 :-  write('winnerDiagonale2'), winnerDiagonale2(
  _29,'X',_31,_32,_33,'X',_35,
  'X',_37,_38,_39,_40,_41,'X']
 , 'X', 1),
-winnerDiagonale2(
+gameOver : winnerDiagonale2(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -118,7 +118,7 @@ winnerDiagonale2(
  _29,'X',_31,_32,_33,_34,_35,
  'X',_37,_38,_39,_40,_41,_42]
 , 'X', 1),
-not(winnerDiagonale2(
+not(gameOver : winnerDiagonale2(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -127,7 +127,7 @@ not(winnerDiagonale2(
  'X',_37,_38,_39,_40,_41,_42]
 , 'O', 1)), writeln(' : check').
 
-testWinner :-  write('winner'), winner(
+testWinner :-  write('winner'), gameOver : winner(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,_18,_19,_20,_21,
@@ -135,7 +135,7 @@ testWinner :-  write('winner'), winner(
  _29,_30,_31,_32,_33,_34,_35,
  _36,'X','X','X','X',_41,_42]
 , 'X'),
-winner(
+gameOver : winner(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  'X',_16,_17,_18,_19,_20,_21,
@@ -143,7 +143,7 @@ winner(
  'X',_30,_31,_32,_33,_34,_35,
  'X',_37,_38,_39,_40,_41,_42]
 , 'X'),
-winner(
+gameOver : winner(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -151,7 +151,7 @@ winner(
  _29,'X',_31,_32,_33,_34,_35,
  'X',_37,_38,_39,_40,_41,_42]
 , 'X'),
-winner(
+gameOver : winner(
 [_01,_02,_03,_04,_05,_06,_07,
  _08,_09,_10,_11,_12,_13,_14,
  _15,_16,_17,'X',_19,_20,_21,
@@ -159,7 +159,7 @@ winner(
  _29,_30,_31,_32,_33,'X',_35,
  _36,_37,_38,_39,_40,_41,'X']
 , 'X'),
-not(winner(
+not(gameOver : winner(
 [_12,_13,_14,_15,_16,_17,_18,
 _19,_20,_21,_25,'X',_23,_24,
 'X','O',_25,_26,'O',_27,_28,
@@ -180,7 +180,7 @@ testGameOverDraw :-  write('gameover draw'),
             'O','O','X','X','O','O','O',
             'O','O','X','O','X','X','X']
            )),
-    gameover('Draw'),
+    gameOver : gameover('Draw'),
     retractall(board(_)),
     writeln(' : check').
 
@@ -193,19 +193,19 @@ testGameOverWin :-  write('gameover win'),
             'O','O','X','X','O','O','O',
             'O','O','X','O','X','X','X']
            )),
-    gameover('O'),
-    retractall(board(_)),
+    gameOver : gameover('O'),
+    retractall(gameOver : board(_)),
     writeln(' : check').
 
-testIsBoardFull :-  write('isBoardFull'),isBoardFull([]),
-    isBoardFull(
+testIsBoardFull :-  write('isBoardFull'),gameOver : isBoardFull([]),
+   gameOver : isBoardFull(
             ['O','O','O','X','O','O','X',
             'O','X','X','O','X','X','O',
             'X','O','O','X','O','X','O',
             'X','X','O','X','O','X','X',
             'O','O','X','X','O','O','O',
             'O','O','X','O','X','X','X']),
-   not(isBoardFull(
+   not(gameOver : isBoardFull(
             ['O','O','O',_12,'O','O','X',
             'O','X','X','O','X','X','O',
             'X','O','O','X','O','X','O',
@@ -214,10 +214,16 @@ testIsBoardFull :-  write('isBoardFull'),isBoardFull([]),
             'O','O','X','O','X','X','X'])),
    writeln(' : check').
 
-testGameOver :- testIsBoardFull, testGameOverDraw, testGameOverWin.
+testgameOver :- testIsBoardFull, testGameOverDraw, testGameOverWin.
 
-testInv :-  write('inv'),inv([],[]), inv([1,2],[2,1]),
+testInv :-  write('inv'),utilsAIvsAI : inv([],[]), utilsAIvsAI : inv([1,2],[2,1]), utilsAIvsAI : inv([1,2,3,4],[4,3,2,1]),
  writeln(' : check').
 
+testPlayIAvsIA :-  write('playIAvsIA'),
+     writeln(' : check').
 
-allTests :- testWinners, testGameOver, testInv.
+
+testPlay :- testPlayIAvsIA.
+
+
+allTests :- testWinners, testgameOver, testInv, testPlay.
