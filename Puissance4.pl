@@ -51,25 +51,24 @@ inv([A|B],R) :- inv(B,X),append(X,[A],R).
 %%%% in the Board (an element which is an free variable).
 
 %%% Verifier si la case est vide ou non:
-%%% si oui => on peut jouer dans cette case, %%% Move is 41-Index ==> récupere le n° correcte de la case
-%%% sinon ==> on utilse le prédicat verif2 pour incrementer l'index par 7 et renfait verif1
-verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;verif2(Index,B,Move).
+%%% si oui => on peut jouer dans cette case, %%% Move is 41-Index ==> rÃ©cupere le nÂ° correcte de la case
+%%% sinon ==> on utilse le prÃ©dicat verif2 pour incrementer l'index par 7 et renfait verif1
+verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;Index<42,verif2(Index,B,Move).
 verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
 ia(B,Move,_) :-
-                       inv(B,R), %%% On va parcourir le board dans le sens contraire
-				             %%% pour trouver la case vide qui appartient à la ligne la plus basse.
-                       Index1 is random(7),  % Attribution d'un numéro alétoire de colonne
-                       Index is 6-Index1,    % Adaptation du n°de colonne avec le board inversé.
-                       verif1(Index,R,Move);
-                       ia(B,Move,_);
-                       writeln("Le plateau est plein !!!!")
-                       .
+                            repeat,     
+                            inv(B,R), %%% On va parcourir le board dans le sens contraire 
+                                      %%% pour trouver la case vide qui appartient à la ligne la plus basse.
+                            Index1 is random(7),  % Attribution d'un numéro alétoire de colonne 
+                            Index is 6-Index1,    % Adaptation du n°de colonne avec le board inversé.
+                            verif1(Index,R,Move);
+                            (nonvar(Move)->!).
 %%%% fonction qui donne la bonne case vide dans la colonne choisie par le player human %%%%%
 human(B,X,Move,_) :-
                        inv(B,R), %%% On va parcourir le board dans le sens contraire
-                                 %%% pour trouver la case vide qui appartient à la ligne la plus basse.
+                                 %%% pour trouver la case vide qui appartient Ã  la ligne la plus basse.
 
-                       Index is 6-X,    % Adaptation du n°de colonne avec le board inversé.
+                       Index is 6-X,    % Adaptation du nÂ°de colonne avec le board inversÃ©.
                        verif1(Index,R,Move). %
 
 
@@ -88,7 +87,9 @@ playIAvsIA(Player):-
 
 
 %%%%% fonction play pour un human contre Random AI %%%%%%
+<<<<<<< HEAD
 playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
+>>>>>>> origin/master
 playHumanVsIA(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
@@ -177,7 +178,7 @@ init :-
 
 
 
-%%% Selon le choix, on lance la fonction adéquate %%%%%
+%%% Selon le choix, on lance la fonction adÃ©quate %%%%%
 playerType(X,Y):-
     (
     X=1, Y=1, playIAvsIA('X');
@@ -185,7 +186,7 @@ playerType(X,Y):-
     X=0, Y=1, playHumanVsIA('X')
     ).
 
-%%% Lire un choix qui doit être un entier et entre le Min et le Max
+%%% Lire un choix qui doit Ãªtre un entier et entre le Min et le Max
 readChoice(X, Min, Max) :-
     repeat,
     write('   The value must be between '), write(Min), write(' and '), write(Max), writeln(' (exclusive)'),
