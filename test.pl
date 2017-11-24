@@ -31,7 +31,7 @@ winnerHorizontal(
 'a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a']
-, 'X', 1)).
+, 'X', 1)), writeln('winnerHorizontal : check').
 
 
 testWinnerVertical :- winnerVertical(
@@ -49,17 +49,16 @@ not(winnerVertical(
 'O','O','a','a','a','a','a',
 'O','a','a','a','a','a','a',
 'O','a','a','a','a','a','a']
-, 'O', 1))
-.
+, 'O', 1)), writeln('winnerVertical : check').
 
 testWinnerDiagonale1 :- winnerDiagonale1(
 ['a','a','a','a','a','a','a',
 'a','a','a','a','a','a','a',
 'a','a','a','X','a','a','a',
-'a','a','X','a','a','a','a',
-'a','X','a','a','a','a','a',
-'X','a','a','a','a','a','a']
-, 'X', 1).
+'a','a','X','a','X','a','a',
+'a','X','a','a','a','X','a',
+'X','a','a','a','a','a','X']
+, 'X', 1), writeln('winnerDiagonale1 : check').
 
 
 %testWinnerDiagonale2 :- winnerDiagonale2(Board, P, N).
