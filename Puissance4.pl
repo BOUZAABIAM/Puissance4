@@ -16,7 +16,7 @@ gameover('Draw') :- board(Board), isBoardFull(Board). % the Board is fully insta
 
 sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2. %true if index A and B are on the same line
 %sameItem : true if the elements at the A, B, C and D index of the board are P
-sameItem(A, B, C, D, Board, P):-  nth1(A, Board, P), nth1(B, Board, P), nth1(C, Board, P), nth1(D, Board, P),nonvar(P).
+sameItem(A, B, C, D, Board, P):-  nth1(A, Board, Q), nth1(B, Board, R), nth1(C, Board, S), nth1(D, Board, P), nonvar(Q), nonvar(R), nonvar(S), Q == R, R == S, S == P.
 
 
 winnerHorizontal(Board, P, N):- N < 40, N1 is N+1, N2 is N+2, N3 is N+3, sameLine(N, N3), sameItem(N, N1, N2, N3, Board, P), !.
@@ -48,85 +48,85 @@ inv([A|B],R) :- inv(B,X),append(X,[A],R).
 
 %%%% Artificial intelligence: choose in a Board the index to play for Player (_) //Done   %%%%
 %%%% This AI plays randomly and does not care who is playing: it chooses a free position  %%%%
-%%%% in the Board (an element which is an free variable).      
+%%%% in the Board (an element which is an free variable).
 
 %%% Verifier si la case est vide ou non:
 %%% si oui => on peut jouer dans cette case, %%% Move is 41-Index ==> récupere le n° correcte de la case
-%%% sinon ==> on utilse le prédicat verif2 pour incrementer l'index par 7 et renfait verif1 
+%%% sinon ==> on utilse le prédicat verif2 pour incrementer l'index par 7 et renfait verif1
 verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;verif2(Index,B,Move).
 verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
-ia(B,Move,_) :-       
-                       inv(B,R), %%% On va parcourir le board dans le sens contraire 
-		       		             %%% pour trouver la case vide qui appartient à la ligne la plus basse.
-                       Index1 is random(7),  % Attribution d'un numéro alétoire de colonne 
+ia(B,Move,_) :-
+                       inv(B,R), %%% On va parcourir le board dans le sens contraire
+				             %%% pour trouver la case vide qui appartient à la ligne la plus basse.
+                       Index1 is random(7),  % Attribution d'un numéro alétoire de colonne
                        Index is 6-Index1,    % Adaptation du n°de colonne avec le board inversé.
                        verif1(Index,R,Move);
                        ia(B,Move,_);
                        writeln("Le plateau est plein !!!!")
                        .
 %%%% fonction qui donne la bonne case vide dans la colonne choisie par le player human %%%%%
-human(B,X,Move,_) :-       
-                       inv(B,R), %%% On va parcourir le board dans le sens contraire 
+human(B,X,Move,_) :-
+                       inv(B,R), %%% On va parcourir le board dans le sens contraire
                                  %%% pour trouver la case vide qui appartient à la ligne la plus basse.
-                       
+
                        Index is 6-X,    % Adaptation du n°de colonne avec le board inversé.
-                       verif1(Index,R,Move). % 
-                       
-		       
+                       verif1(Index,R,Move). %
+
+
 %%%% fonction play Random AI contre Random AI %%%%
 playIAvsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
-playIAvsIA(Player):-  
+playIAvsIA(Player):-
         write('New turn for:'), writeln(Player),
         board(Board), % instanciate the board from the knowledge base
         ia(Board, Move,Player), % ask the AI for a move, that is, an index for the Player
 	    playMove(Board,Move,NewBoard,Player), % Play the move and get the result in a new Board
         applyIt(Board, NewBoard), % Remove the old board from the KB and store the new one
-    	displayBoard, % print it
+	displayBoard, % print it
 	    changePlayer(Player,NextPlayer), % Change the player before next turn
         playIAvsIA(NextPlayer). % next turn!
 
 
 
 %%%%% fonction play pour un human contre Random AI %%%%%%
-playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
-playHumanVsIA(Player):-  
+playHumanVsIA(_):- writeln("Rentr� en gameover"), gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
+playHumanVsIA(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
         write('It is your turn : '),write(Player),write(' choose a column number : '), read(X),X1 is X-1,
-        human(Board,X1, MoveH,Player), 
-        playMove(Board,MoveH,NewBoard,Player), 
-        applyIt(Board, NewBoard), 
+        human(Board,X1, MoveH,Player),
+        playMove(Board,MoveH,NewBoard,Player),
+        applyIt(Board, NewBoard),
         displayBoard,
-        changePlayer(Player,NextPlayer), 
+        changePlayer(Player,NextPlayer),
         write('New turn for IA : '), writeln(NextPlayer),
         board(Board2),
         ia(Board2, Move,NextPlayer),
-        playMove(Board2,Move,NewBoard2,NextPlayer), 
+        playMove(Board2,Move,NewBoard2,NextPlayer),
         applyIt(Board2, NewBoard2),
-        changePlayer(NextPlayer,Player), 
+        changePlayer(NextPlayer,Player),
         playHumanVsIA(Player). % next turn!
 
 
 %%%%% fonction play pour un human contre un human %%%%%%
 playHumanVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
-playHumanVsHuman(Player):-  
+playHumanVsHuman(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
         write('It the turn for: '),write(Player),write(' choose a column number : '), read(X),X1 is X-1,
-        human(Board,X1, MoveH1,Player), 
-        playMove(Board,MoveH1,NewBoard,Player), 
-        applyIt(Board, NewBoard), 
+        human(Board,X1, MoveH1,Player),
+        playMove(Board,MoveH1,NewBoard,Player),
+        applyIt(Board, NewBoard),
         displayBoard,
-        changePlayer(Player,NextPlayer), 
+        changePlayer(Player,NextPlayer),
         write('It the turn for: '),write(NextPlayer),write(' choose a column number : '), read(X2),X3 is X2-1,
         board(Board2),
-        human(Board2,X3, MoveH2,NextPlayer), 
-        playMove(Board2,MoveH2,NewBoard2,NextPlayer), 
-        applyIt(Board2, NewBoard2), 
+        human(Board2,X3, MoveH2,NextPlayer),
+        playMove(Board2,MoveH2,NewBoard2,NextPlayer),
+        applyIt(Board2, NewBoard2),
         changePlayer(NextPlayer,Player),
         playHumanVsHuman(Player).
 
-       
+
 
 
 %%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move //DONE
@@ -163,9 +163,9 @@ displayBoard:-
     writeln(' ----------------------------').
 
 %%%%% Start the game! //TODO : replace displayBoard by play when it works
-init :- 
+init :-
         retractall(board(_)),
-        length(Board,42), 
+        length(Board,42),
         assert(board(Board)),
         writeln('What is the type of the first player which will use the symbol X ?'),
         writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),
@@ -174,8 +174,8 @@ init :-
         writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),
         readChoice(Player2, -1, 2),
         playerType(Player1,Player2).
-        
-        
+
+
 
 %%% Selon le choix, on lance la fonction adéquate %%%%%
 playerType(X,Y):-
@@ -187,7 +187,7 @@ playerType(X,Y):-
 
 %%% Lire un choix qui doit être un entier et entre le Min et le Max
 readChoice(X, Min, Max) :-
-    repeat, 
+    repeat,
     write('   The value must be between '), write(Min), write(' and '), write(Max), writeln(' (exclusive)'),
     readInt(X),
     X < Max,
@@ -195,6 +195,6 @@ readChoice(X, Min, Max) :-
     !.
 readInt(X) :-
     repeat, write('    Please enter an integer '), read(X), integer(X), !.
-        
+
 
 
