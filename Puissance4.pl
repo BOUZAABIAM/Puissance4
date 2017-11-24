@@ -106,6 +106,25 @@ playHumanVsIA(Player):-
         changePlayer(NextPlayer,Player),
         playHumanVsIA(Player). % next turn!
 
+%%%%% fonction play pour un AI contre human %%%%%%
+playIAVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
+playIAVsHuman(Player):-
+        board(Board), % instanciate the board from the knowledge base
+        displayBoard, % print it
+        write('New turn for IA : '), writeln(Player),
+        ia(Board, Move,Player),
+        playMove(Board,Move,NewBoard,Player),
+        applyIt(Board, NewBoard),
+        displayBoard,
+        changePlayer(Player,NextPlayer),
+        write('It is your turn : '),write(NextPlayer),write(' choose a column number : '), readChoice(X, 0, 8),X1 is X-1,
+        board(Board2),
+        human(Board2,X1, MoveH,NextPlayer),
+        playMove(Board2,MoveH,NewBoard2,NextPlayer),
+        applyIt(Board2, NewBoard2),
+        changePlayer(NextPlayer,Player),
+        playIAVsHuman(Player). % next turn!
+
 
 %%%%% fonction play pour un human contre un human %%%%%%
 playHumanVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
