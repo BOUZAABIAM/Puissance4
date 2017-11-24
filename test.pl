@@ -161,14 +161,60 @@ winner(
 'a','O','a','O','a','a','a']
 , 'O'),
 not(winner(
-['a','a','a','a','a','a','a',
-'a','a','a','a','X','a','a',
-'X','O','a','a','O','a','a',
-'X','X','O','a','O','a','a',
+[_12,_13,_14,_15,_16,_17,_18,
+_19,_20,_21,_25,'X',_23,_24,
+'X','O',_25,_26,'O',_27,_28,
+'X','X','O',_29,'O',_30,_31,
 'O','O','X','X','O','O','O',
 'O','O','X','O','X','X','X']
 , 'O')), writeln(' : check').
 
 testWinners :- testSameLine, testSameItem, testWinnerHorizontal, testWinnerVertical, testWinnerDiagonale1, testWinnerDiagonale2, testWinner.
 
-allTests :- testWinners.
+
+testGameOverDraw :-  write('gameover draw'),
+    assert(board(
+           ['O','O','O','X','O','O','X',
+            'O','X','X','O','X','X','O',
+            'X','O','O','X','O','X','O',
+            'X','X','O','X','O','X','X',
+            'O','O','X','X','O','O','O',
+            'O','O','X','O','X','X','X']
+           )),
+    gameover('Draw'),
+    retractall(board(_)),
+    writeln(' : check').
+
+testGameOverWin :-  write('gameover win'),
+    assert(board(
+           [_12,_13,_14,_15,_16,_17,_18,
+            _19,_20,_21,_25,'O',_23,_24,
+            'X','O',_25,_26,'O',_27,_28,
+            'X','X','O',_29,'O',_30,_31,
+            'O','O','X','X','O','O','O',
+            'O','O','X','O','X','X','X']
+           )),
+    gameover('O'),
+    retractall(board(_)),
+    writeln(' : check').
+
+testIsBoardFull :- isBoardFull([]),
+    isBoardFull(
+            ['O','O','O','X','O','O','X',
+            'O','X','X','O','X','X','O',
+            'X','O','O','X','O','X','O',
+            'X','X','O','X','O','X','X',
+            'O','O','X','X','O','O','O',
+            'O','O','X','O','X','X','X']),
+   not(isBoardFull(
+            ['O','O','O',_12,'O','O','X',
+            'O','X','X','O','X','X','O',
+            'X','O','O','X','O','X','O',
+            'X','X','O','X','O','X','X',
+            'O','O','X','X','O','O','O',
+            'O','O','X','O','X','X','X'])).
+
+testGameOver :- testIsBoardFull, testGameOverDraw, testGameOverWin.
+
+
+allTests :- testWinners, testGameOver.
