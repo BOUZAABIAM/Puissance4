@@ -92,7 +92,7 @@ playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln
 playHumanVsIA(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
-        write('It is your turn : '),write(Player),write(' choose a column number : '), read(X),X1 is X-1,
+        write('It is your turn : '),write(Player),write(' choose a column number : '), readChoice(X, 0, 8),X1 is X-1,
         human(Board,X1, MoveH,Player),
         playMove(Board,MoveH,NewBoard,Player),
         applyIt(Board, NewBoard),
@@ -131,13 +131,13 @@ playHumanVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writ
 playHumanVsHuman(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
-        write('It the turn for: '),write(Player),write(' choose a column number : '), read(X),X1 is X-1,
+        write('It the turn for: '),write(Player),write(' choose a column number : '), readChoice(X, 0, 8),X1 is X-1,
         human(Board,X1, MoveH1,Player),
         playMove(Board,MoveH1,NewBoard,Player),
         applyIt(Board, NewBoard),
         displayBoard,
         changePlayer(Player,NextPlayer),
-        write('It the turn for: '),write(NextPlayer),write(' choose a column number : '), read(X2),X3 is X2-1,
+        write('It the turn for: '),write(NextPlayer),write(' choose a column number : '), readChoice(X2, 0, 8),X3 is X2-1,
         board(Board2),
         human(Board2,X3, MoveH2,NextPlayer),
         playMove(Board2,MoveH2,NewBoard2,NextPlayer),
@@ -199,6 +199,7 @@ init :-
 %%% Selon le choix, on lance la fonction ad�quat %%%%%
 playerType(X,Y):-
     (
+    X=1, Y=0, playIAVsHuman('X');
     X=1, Y=1, playIAvsIA('X');
     X=0, Y=0, playHumanVsHuman('X');
     X=0, Y=1, playHumanVsIA('X')
