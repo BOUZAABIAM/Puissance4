@@ -17,7 +17,7 @@ gameover('Draw') :- board(Board), isBoardFull(Board). % the Board is fully insta
 sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2. %true if index A and B are on the same line
 %%%%sameItem : true if the elements at the A, B, C and D index of theboard are P
 
-sameItem(A, B, C, D, Board, P):-  nth1(A, Board, Q), nth1(B, Board, R),nth1(C, Board, S),nth1(D, Board, T),nonvar(Q), nonvar(R), nonvar(S), nonvar(T), Q == R, R == S, S == T, T == P.
+sameItem(A, B, C, D, Board, P):-  nth1(A, Board, Q), nth1(B, Board, R),nth1(C, Board, S),nth1(D, Board, P),nonvar(Q), nonvar(R), nonvar(S), Q == P, R == P, S == P.
 
 
 winnerHorizontal(Board, P, N):- N < 40, N1 is N+1, N2 is N+2, N3 is N+3, sameLine(N, N3), sameItem(N, N1, N2, N3, Board, P), !.
@@ -92,7 +92,7 @@ playHumanVsIA(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln
 playHumanVsIA(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
-        write('It is your turn : '),write(Player),write(' choose a column number : '), read(X),X1 is X-1,
+        write('It is your turn : '),write(Player),write(' choose a column number : '), readChoice(X, 0, 8),X1 is X-1,
         human(Board,X1, MoveH,Player),
         playMove(Board,MoveH,NewBoard,Player),
         applyIt(Board, NewBoard),
@@ -106,19 +106,38 @@ playHumanVsIA(Player):-
         changePlayer(NextPlayer,Player),
         playHumanVsIA(Player). % next turn!
 
+%%%%% fonction play pour un AI contre human %%%%%%
+playIAVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
+playIAVsHuman(Player):-
+        board(Board), % instanciate the board from the knowledge base
+        displayBoard, % print it
+        write('New turn for IA : '), writeln(Player),
+        ia(Board, Move,Player),
+        playMove(Board,Move,NewBoard,Player),
+        applyIt(Board, NewBoard),
+        displayBoard,
+        changePlayer(Player,NextPlayer),
+        write('It is your turn : '),write(NextPlayer),write(' choose a column number : '), readChoice(X, 0, 8),X1 is X-1,
+        board(Board2),
+        human(Board2,X1, MoveH,NextPlayer),
+        playMove(Board2,MoveH,NewBoard2,NextPlayer),
+        applyIt(Board2, NewBoard2),
+        changePlayer(NextPlayer,Player),
+        playIAVsHuman(Player). % next turn!
+
 
 %%%%% fonction play pour un human contre un human %%%%%%
 playHumanVsHuman(_):- gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard, !.
 playHumanVsHuman(Player):-
         board(Board), % instanciate the board from the knowledge base
         displayBoard, % print it
-        write('It the turn for: '),write(Player),write(' choose a column number : '), read(X),X1 is X-1,
+        write('It the turn for: '),write(Player),write(' choose a column number : '), readChoice(X, 0, 8),X1 is X-1,
         human(Board,X1, MoveH1,Player),
         playMove(Board,MoveH1,NewBoard,Player),
         applyIt(Board, NewBoard),
         displayBoard,
         changePlayer(Player,NextPlayer),
-        write('It the turn for: '),write(NextPlayer),write(' choose a column number : '), read(X2),X3 is X2-1,
+        write('It the turn for: '),write(NextPlayer),write(' choose a column number : '), readChoice(X2, 0, 8),X3 is X2-1,
         board(Board2),
         human(Board2,X3, MoveH2,NextPlayer),
         playMove(Board2,MoveH2,NewBoard2,NextPlayer),
@@ -180,6 +199,7 @@ init :-
 %%% Selon le choix, on lance la fonction ad�quat %%%%%
 playerType(X,Y):-
     (
+    X=1, Y=0, playIAVsHuman('X');
     X=1, Y=1, playIAvsIA('X');
     X=0, Y=0, playHumanVsHuman('X');
     X=0, Y=1, playHumanVsIA('X')
