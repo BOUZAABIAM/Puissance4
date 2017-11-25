@@ -1,6 +1,7 @@
 :- module('display', []).
 :- use_module('init').
 :- use_module('game').
+:- [color].
 
 
 
