@@ -7,7 +7,8 @@
 %%%% Print the value of the board at index N %%%%
 %% if its a variable, print " " and X or O otherwise.
 printVal(N) :- init: board(B), nth0(N,B,Val), var(Val), write('_'), write(' | '), !.
-printVal(N) :- init: board(B), nth0(N,B,Val), write(Val),  write(' | ').
+printVal(N) :- init: board(B), nth0(N,B,Val),Val='X',ansi_format([fg(red)], Val, []),  write(' | '),!.
+printVal(N) :- init: board(B), nth0(N,B,Val),Val='O',ansi_format([fg(green)], Val, []),  write(' | ').
 
 %%%% Display the board //DONE
 displayBoard:-
