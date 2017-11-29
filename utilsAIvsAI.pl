@@ -28,10 +28,10 @@ verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;I
 verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
 ia(B,Move,_) :-
         repeat,
-        inv(B,R), %%% On va parcourir le board dans le sens contraire
-                  %%% pour trouver la case vide qui appartient à la ligne la plus basse.
-        Index1 is random(7),  % Attribution d'un numéro alétoire de colonne
-        Index is 6-Index1,    % Adaptation du n°de colonne avec le board inversé.
+        inv(B,R), %%% We parse the inversed board 
+                  %%% To find an empty case on the lowest row
+        Index1 is random(7),  % Choose a random column number
+        Index is 6-Index1,    % Adapt the choosed number to the inversed board
         verif1(Index,R,Move);
         (nonvar(Move)->!).
 

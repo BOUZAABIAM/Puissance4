@@ -1,4 +1,5 @@
 :- module('game', []).
+:- use_module('init').
 :- use_module('utilsAIvsAI').
 :- use_module('utilsHvsH').
 :- use_module('utilsHvsAI').
@@ -17,12 +18,12 @@ playerType(X,Y):-
     X=0, Y=1, utilsHvsAI: playHumanVsIA('X')
     ).
 
-%%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move //DONE
+%%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move
 playMove(Board,Move,NewBoard,Player) :- Board=NewBoard,  nth0(Move,NewBoard,Player).
 
-%%%% Remove old board/save new on in the knowledge base //DONE
+%%%% Remove old board/save new on in the knowledge base/
 applyIt(Board,NewBoard) :- retract(init: board(Board)), assert(init: board(NewBoard)).
 
-%%%% Predicate to get the next player //DONE
+%%%% Predicate to get the next player 
 changePlayer('X','O').
 changePlayer('O','X').

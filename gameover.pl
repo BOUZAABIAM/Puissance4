@@ -2,18 +2,17 @@
 :- use_module('init').
 
 
-%%%% Test is the game is finished %%% //DONE
+%%%% Test is the game is finished %%% 
 gameover(Winner) :- init: board(Board), winner(Board,Winner), !.  % There exists a winning configuration: We cut!
-gameover('Draw') :- write(' 1 '),init: board(Board),write(' 2 '), isBoardFull(Board),write(' 1 '). % the Board is fully instanciated (no free variable): Draw.
+gameover('Draw') :- write(' 1 '),init: board(Board),write(' 2 '), isBoardFull(Board),write(' 3 '). % the Board is fully instanciated (no free variable): Draw.
 
-%%%% Test if a Board is a winning configuration for the player P. //TODO
+%%%true if index A and B are on the same line
+sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2. 
 
-sameLine(A, B) :- M1 is div(A, 7), M2 is div(B, 7), M1 =:= M2. %true if index A and B are on the same line
 %%%%sameItem : true if the elements at the A, B, C and D index of theboard are P
-
 sameItem(A, B, C, D, Board, P):-  nth1(A, Board, Q), nth1(B, Board, R),nth1(C, Board, S),nth1(D, Board, P),nonvar(Q), nonvar(R), nonvar(S), Q == P, R == P, S == P.
 
-
+%%%% Test if a Board is a winning configuration for the player P.
 winnerHorizontal(Board, P, N):- N < 40, N1 is N+1, N2 is N+2, N3 is N+3, sameLine(N, N3), sameItem(N, N1, N2, N3, Board, P), !.
 winnerHorizontal(Board, P, N):- N < 39,  N1 is N+1, winnerHorizontal(Board, P, N1).
 winnerVertical(Board, P, N):- N < 22, N1 is N+7, N2 is N+14, N3 is N+21, sameItem(N, N1, N2, N3, Board, P), !.
