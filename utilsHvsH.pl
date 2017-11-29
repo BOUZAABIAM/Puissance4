@@ -5,7 +5,7 @@
 :- use_module('gameover').
 
 
-%%%%% fonction play pour un human contre un human %%%%%%
+%%%%% fonction play for an human vs an human %%%%%%
 playHumanVsHuman(_):- gameover: gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), display: displayBoard, !.
 playHumanVsHuman(Player):-
         init: board(Board), % instanciate the board from the knowledge base
@@ -24,7 +24,7 @@ playHumanVsHuman(Player):-
         game: changePlayer(NextPlayer,Player),
         playHumanVsHuman(Player).
 
-%%%% fonction qui donne la bonne case vide dans la colonne choisie par le player human %%%%%
+%%%% return the right empty case in the column choosen by the human player %%%%%
 human(B,X,Move,_) :-
           inv(B,R), %%% On va parcourir le board dans le sens contraire
                     %%% pour trouver la case vide qui appartient � la ligne la plus basse.
@@ -39,8 +39,9 @@ append([H|T],L,[H|B]) :- append(T,L,B).
 inv([],[]) :- !.
 inv([A|B],R) :- inv(B,X),append(X,[A],R).
 
-%%% Verifier si la case est vide ou non:
-%%% si oui => on peut jouer dans cette case, %%% Move is 41-Index ==> rÃ©cupere le nÂ° correcte de la case
-%%% sinon ==> on utilse le prÃ©dicat verif2 pour incrementer l'index par 7 et renfait verif1
+%%% Check weither the case is empty
+%%% if true => you can play in that case, 
+%%% Move is 41-Index ==> get the correct case number
+%%% else ==> we use verif2 to increment the index by 7 and do verif1 again
 verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;Index<42,verif2(Index,B,Move).
 verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).

@@ -5,7 +5,7 @@
 
 
 
-%%%%% Start the game! //TODO : replace displayBoard by play when it works
+%%%%% Start the game!
 init :-
         retractall(board(_)),
         length(Board,42),
@@ -20,7 +20,7 @@ init :-
 
 
 
-%%% Lire un choix qui doit Ãªtre un entier et entre le Min et le Max
+%%% Read the choice, must be an Integer between Min and Max
 readChoice(X, Min, Max) :-
     repeat,
     write('   The value must be between '), write(Min), write(' and '), write(Max), writeln(' (exclusive)'),

@@ -2,10 +2,9 @@
 :- use_module('init').
 
 
-
 %%%% Test is the game is finished %%% //DONE
 gameover(Winner) :- init: board(Board), winner(Board,Winner), !.  % There exists a winning configuration: We cut!
-gameover('Draw') :- init: board(Board), isBoardFull(Board). % the Board is fully instanciated (no free variable): Draw.
+gameover('Draw') :- write(' 1 '),init: board(Board),write(' 2 '), isBoardFull(Board),write(' 1 '). % the Board is fully instanciated (no free variable): Draw.
 
 %%%% Test if a Board is a winning configuration for the player P. //TODO
 

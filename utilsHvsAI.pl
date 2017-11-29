@@ -6,7 +6,7 @@
 :- use_module('utilsHvsH').
 :- use_module('utilsAIvsAI').
 
-%%%%% fonction play pour un human contre Random AI %%%%%%
+%%%%% fonction play for an human vs Random AI %%%%%%
 playHumanVsIA(_):- gameover: gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), display: displayBoard, !.
 playHumanVsIA(Player):-
         init: board(Board), % instanciate the board from the knowledge base

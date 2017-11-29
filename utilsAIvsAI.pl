@@ -5,7 +5,7 @@
 :- use_module('gameover').
 
 
-%%%% fonction play Random AI contre Random AI %%%%
+%%%% fonction play Random AI vs Random AI %%%%
 playIAvsIA(_):- gameover: gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), display: displayBoard, !.
 playIAvsIA(Player):-
         write('New turn for:'), writeln(Player),
@@ -19,11 +19,11 @@ playIAvsIA(Player):-
 
 
 
-%%% Verifier si la case est vide ou non:
-%%% si oui => on peut jouer dans cette case,
+%%% Check weither the case is empty
+%%% if yes => you can play in that case,
 %%% Move is 41-Index ==>
-%%% r�cupere le n� correcte de la case sinon ==> on utilse le
-%%% pr�dicat verif2 pour incrementer l'index par 7 et renfait verif1
+%%% else, get the right case number => 
+%%% we use the predicat verif2 to increment the index by 7 and do verif1 again
 verif1(Index,B,Move):- Index < 42, nth0(Index,B,Val),var(Val),Move is 41-Index;Index<42,verif2(Index,B,Move).
 verif2(Index,B,Move):- Inde is Index+7, verif1(Inde,B,Move).
 ia(B,Move,_) :-

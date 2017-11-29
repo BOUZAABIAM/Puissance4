@@ -10,7 +10,7 @@
 
 
 
-%%%%% fonction play pour un AI contre human %%%%%%
+%%%%% fonction play for an AI vs human %%%%%%
 playIAVsHuman(_):- gameover: gameover(Winner), !, write('Game is Over. Winner: '), writeln(Winner), display: displayBoard, !.
 playIAVsHuman(Player):-
         init: board(Board), % instanciate the board from the knowledge base

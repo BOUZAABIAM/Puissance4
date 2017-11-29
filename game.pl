@@ -8,7 +8,7 @@
 
 
 
-%%% Selon le choix, on lance la fonction adÃ©quate %%%%%
+%%% Depending of X and Y, use the right play %%%%%
 playerType(X,Y):-
     (
     X=1, Y=0, utilsAIvsH: playIAVsHuman('X');
