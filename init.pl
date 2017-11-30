@@ -1,5 +1,6 @@
 :- module('init', []).
 :- use_module('game').
+:- use_module('greedyAI').
 
 :- dynamic board/1.
 
@@ -17,6 +18,45 @@ init :-
         writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),
         readChoice(Player2, -1, 2),
         game: playerType(Player1,Player2).
+        
+%%%%% lancer n parties et donner les statistics à la fin %%%%%
+nParties:-		
+        retractall(board(_)),
+        length(Board,42),
+        assert(board(Board)),
+        writeln('You will start N parties, Choose a numbre N : '),
+		readChoice(N, -1, 31),
+		writeln('Which type of parties you want to start : '),
+		writeln('  - 1 : GreedyIA vs RandomIA .'),writeln('  - 2 : MinimaxIA vs GreedyIA .'),
+		readChoice(Type, 0, 3),
+		playNParties(0,N,0,Type).
+
+%%%% If X wins, we increment the numbre of win else no %%%%		
+winner('X',WinX, NewWin):-
+	NewWin is WinX + 1.	
+winner('O',WinX, NewWin):-
+	NewWin is WinX.
+%%%%% In case of draw %%%%
+winner('Draw',WinX, NewWin):-
+	NewWin is WinX.
+	
+%%%% Play N parties and do statistics %%%%%
+playNParties(NActu,N,WinX,Type):-
+    NActu<N,
+    NewNActu is NActu + 1,
+    pl(Type,X),
+    winner(X,WinX,NewWin),
+	write('----> The first player wins '),write(NewWin),write('/'),write(N),writeln(' .'),
+    write('----> Percentage : '),D is NewWin*100/N,write(D),writeln(' %'),
+    playNParties(NewNActu,N,NewWin, Type).
+		
+	
+pl(Type,Win):-
+         retractall(board(_)),
+         length(Board,42), assert(board(Board)), 
+         (
+	     Type=1, greedyAI: playRandomIAVsGreedyIA('X',Win)
+         ).
 
 
 
