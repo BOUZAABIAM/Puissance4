@@ -145,7 +145,7 @@ displayBoard:-
 	write(' | '), printVal(7) , printVal(8) , printVal(9), printVal(10), printVal(11), printVal(12), printVal(13), writeln(''),
     writeln('  ----------------------------'),
     write(' | '), printVal(0) , printVal(1) , printVal(2) , printVal(3) , printVal(4) , printVal(5) , printVal(6) , writeln(''),
-    writeln('  ----------------------------'),
+    writeln('  ----------------------------').
 
 
 		
