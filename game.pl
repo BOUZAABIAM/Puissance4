@@ -17,7 +17,7 @@ playerType(X,Y):-
     X=1, Y=1, utilsAIvsAI: playIAvsIA('X');
     X=0, Y=0, utilsHvsH: playHumanVsHuman('X');
     X=0, Y=1, utilsHvsAI: playHumanVsIA('X');
-    X=2, Y=1, greedyAI: playRandomIAVsGreedyIA('X',Win)
+    X=2, Y=1, greedyAI: playRandomIAVsGreedyIA('X',Win),writeln(''),write('Winner is '),writeln(Win)
     ).
 
 %%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move
