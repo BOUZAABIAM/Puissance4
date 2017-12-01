@@ -1,6 +1,7 @@
 :- module('init', []).
 :- use_module('game').
 :- use_module('greedyAI').
+:- use_module('minimaxAI').
 
 :- dynamic board/1.
 
