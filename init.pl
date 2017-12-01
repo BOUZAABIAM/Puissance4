@@ -42,8 +42,9 @@ winner('Draw',WinX, NewWin):-
 	
 %%%% Play N parties and do statistics %%%%%
 playNParties(NActu,N,WinX,Type):-
+    NActu>=N,!;
     NActu<N,
-    NewNActu is NActu + 1,
+    NewNActu is NActu + 1,writeln(NewNActu),
     pl(Type,X),
     winner(X,WinX,NewWin),
 	write('----> The first player wins '),write(NewWin),write('/'),write(N),writeln(' .'),
@@ -55,9 +56,10 @@ pl(Type,Win):-
          retractall(board(_)),
          length(Board,42), assert(board(Board)), 
          (
+		 Type=2, minimaxAI: playMinimaxIAvsGreedyIA('X',Win);
 	     Type=1, greedyAI: playRandomIAVsGreedyIA('X',Win)
+		 
          ).
-
 
 
 %%% Read the choice, must be an Integer between Min and Max
