@@ -15,8 +15,8 @@ init :-
         writeln('What is the type of the first player which will use the symbol X ?'),
         writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),writeln('  - 2 : for a GreedyAI player .'),writeln('  - 3 : for a MiniMaxAI player .'),
         readChoice(Player1, -1, 4),
-        writeln('What is the type of the second player which will use the symbol O ?'),writeln('  - 2 : for a GreedyAI player .'),
-        writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),
+        writeln('What is the type of the second player which will use the symbol O ?'),
+        writeln('  - 0 : for a human player .'),writeln('  - 1 : for a RandomAI player .'),writeln('  - 2 : for a GreedyAI player .'),
         readChoice(Player2, -1, 3),
         game: playerType(Player1,Player2).
         
