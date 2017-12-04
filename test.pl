@@ -216,8 +216,10 @@ testGameOverDraw :-  write('gameover draw'),
 
 testgameOver :- testIsBoardFull, testGameOverWin, testGameOverDraw.
 
-testInv :-  write('inv'), inv([],[]), inv([1,2],[2,1]), inv([1,2,3,4],[4,3,2,1]),
- writeln(' : check').
+testInv :-  write('inv'), inv([],[]), inv([1,2],[2,1]),
+	inv([1,2,3,4],[4,3,2,1]),
+	not(inv([],['X'])),
+	writeln(' : check').
 
 testVerif1 :- write('verif1'),
 	verif1(39,
@@ -269,15 +271,6 @@ testIa :-  write('ia'),
 
     writeln(' : check').
 	 
-testInv :- write('inv'),
-	inv([],[]),
-	not(inv([],['X']),
-	inv(['A','B','C','D','E','F','G',
-		'H','I','J','K','L','M','N'],
-		
-		['N','M','L','K','J','I','H',
-		'G','F','E','D','C','B','A']),
-	writeln(' : check').
 
 
 testPlay :- testVerif1, testInv.
