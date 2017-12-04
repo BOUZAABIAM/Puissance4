@@ -5,6 +5,7 @@
 :- use_module('utilsHvsAI').
 :- use_module('utilsAIvsH').
 :- use_module('greedyAI').
+:- use_module('minimaxAI').
 
 
 
@@ -17,7 +18,11 @@ playerType(X,Y):-
     X=1, Y=1, utilsAIvsAI: playIAvsIA('X');
     X=0, Y=0, utilsHvsH: playHumanVsHuman('X');
     X=0, Y=1, utilsHvsAI: playHumanVsIA('X');
-    X=2, Y=1, greedyAI: playRandomIAVsGreedyIA('X',Win),writeln(''),write('Winner is '),writeln(Win)
+    X=2, Y=1, greedyAI: playRandomIAVsGreedyIA('X',Win),writeln(''),write('Winner is '),writeln(Win);
+	X=2, Y=0, greedyAI: playGreedyIAvsHuman('X',Win),writeln(''),write('Winner is '),writeln(Win);
+	X=3, Y=2, minimaxAI: playMinimaxIAvsGreedyIA('X',Win),writeln(''),write('Winner is '),writeln(Win);
+	X=3, Y=1, minimaxAI: playMiniMaxIAvsRandomIA('X',Win),writeln(''),write('Winner is '),writeln(Win);
+	X=3, Y=0, minimaxAI: playMiniMaxIAvsHuman('X',Win),writeln(''),write('Winner is '),writeln(Win)
     ).
 
 %%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move
